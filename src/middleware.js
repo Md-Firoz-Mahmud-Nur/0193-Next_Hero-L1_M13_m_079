@@ -1,18 +1,16 @@
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-const coo = "next-superhero";
+export const middleware = async (request) => {
+  const token = cookies(request).get("next-auth.session-token");
 
-export const middleware = (request) => {
-  console.log(request.cookies.get("token")?.value);
-  const cookies = request.cookies.get("token");
-
-  if (!cookies || cookies.value !== coo) {
-    return NextResponse.redirect(new URL("/about", request.url));
+  if (!token) {
+    return NextResponse.redirect(new URL("/api/auth/signin", request.url));
   }
 
   return NextResponse.next();
 };
 
 export const config = {
-  matcher: ["/service"],
+  matcher: ["/dashboard", "/services"],
 };

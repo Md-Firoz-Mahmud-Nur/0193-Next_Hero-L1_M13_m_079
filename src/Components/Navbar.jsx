@@ -1,6 +1,5 @@
 "use client";
-import button from "daisyui/components/button";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -46,19 +45,25 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
-      {session ? (
-        <button onClick={handler} className="bg-white text-lime-300 p-4">
+      {!session ? (
+        <button
+          onClick={handler}
+          className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
           Login
         </button>
       ) : (
-        <button>Logout</button>
+        <button
+          onClick={() => signOut()}
+          className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
+          Logout
+        </button>
       )}
 
       <div className="flex">
         <Image
           src={session.data?.user?.image}
-          width={45}
-          height={30}
+          width={30}
+          height={20}
           alt="session.data?.user?.name"></Image>
         <h6>
           {session.data?.user?.name}
