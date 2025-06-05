@@ -1,4 +1,6 @@
 "use client";
+import button from "daisyui/components/button";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
@@ -6,6 +8,8 @@ import React from "react";
 const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
+  const session = useSession();
+  console.log(session);
   const links = [
     { title: "About", path: "/about" },
     { title: "Service", path: "/service" },
@@ -19,7 +23,7 @@ const Navbar = () => {
   ];
 
   const handler = () => {
-    router.push("/about");
+    router.push("/api/auth/signin");
   };
 
   if (pathName.includes("dashboard")) {
@@ -41,9 +45,13 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
-      <button onClick={handler} className="bg-white text-lime-300 p-4">
-        Login
-      </button>
+      {session ? (
+        <button onClick={handler} className="bg-white text-lime-300 p-4">
+          Login
+        </button>
+      ) : (
+        <button>Logout</button>
+      )}
     </nav>
   );
 };
