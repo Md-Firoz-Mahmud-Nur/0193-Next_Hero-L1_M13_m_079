@@ -1,6 +1,7 @@
 "use client";
 import button from "daisyui/components/button";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
@@ -9,7 +10,7 @@ const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
   const session = useSession();
-  console.log(session);
+  console.log({ session });
   const links = [
     { title: "About", path: "/about" },
     { title: "Service", path: "/service" },
@@ -52,6 +53,19 @@ const Navbar = () => {
       ) : (
         <button>Logout</button>
       )}
+
+      <div className="flex">
+        <Image
+          src={session.data?.user?.image}
+          width={45}
+          height={30}
+          alt="session.data?.user?.name"></Image>
+        <h6>
+          {session.data?.user?.name}
+          <br />
+          {session.data?.user?.type}
+        </h6>
+      </div>
     </nav>
   );
 };

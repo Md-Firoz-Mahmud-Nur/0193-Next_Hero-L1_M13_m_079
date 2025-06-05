@@ -5,6 +5,7 @@ export const authOptions = {
   secret: process.env.AUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
   },
   providers: [
     Credentials({
@@ -41,6 +42,19 @@ export const authOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async jwt({ token, account, user }) {
+      if (account) {
+        token.type = user.type;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.type = token.type;
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
@@ -50,7 +64,17 @@ const users = [
     id: 1,
     name: "Nur",
     email: "nur@gmail.com",
+    type: "Admin",
     password: "password",
+    image: "https://picsum.photos/200/300",
+  },
+  {
+    id: 1,
+    name: "firoz",
+    email: "firoz@gmail.com",
+    type: "member",
+    password: "password",
+    image: "https://picsum.photos/200/300",
   },
 ];
 
