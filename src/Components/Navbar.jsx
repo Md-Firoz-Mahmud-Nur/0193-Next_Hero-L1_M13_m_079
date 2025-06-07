@@ -45,19 +45,27 @@ const Navbar = () => {
           </Link>
         ))}
       </ul>
-      {!session ? (
-        <button
-          onClick={handler}
-          className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
-          Login
-        </button>
-      ) : (
-        <button
-          onClick={() => signOut()}
-          className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
-          Logout
-        </button>
-      )}
+
+      <div>
+        <Link href={"/api/auth/signup"}>
+          <button className="mr-3 bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
+            Sign Up
+          </button>
+        </Link>
+        {!session ? (
+          <button
+            onClick={handler}
+            className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
+            Login
+          </button>
+        ) : (
+          <button
+            onClick={() => signOut()}
+            className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
+            Logout
+          </button>
+        )}
+      </div>
 
       <div className="flex">
         <Image
