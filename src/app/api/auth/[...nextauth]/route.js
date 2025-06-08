@@ -30,7 +30,8 @@ export const authOptions = {
           return null;
         }
         if (email) {
-          const currentUser = users.find((user) => user.email === email);
+          const db = await connectDB();
+          const currentUser = await db.collection("users").findOne({ email });
 
           if (currentUser) {
             if (currentUser.password === password) {
