@@ -52,7 +52,7 @@ const Navbar = () => {
             Sign Up
           </button>
         </Link>
-        {!session ? (
+        {session.status !== "authenticated" ? (
           <button
             onClick={handler}
             className="bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
