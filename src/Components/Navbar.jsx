@@ -68,19 +68,20 @@ const Navbar = () => {
           </button>
         )}
       </div>
-
-      <div className="flex">
-        <Image
-          src={session.data?.user?.image}
-          width={30}
-          height={20}
-          alt="session.data?.user?.name"></Image>
-        <h6>
-          {session.data?.user?.name}
-          <br />
-          {session.data?.user?.type}
-        </h6>
-      </div>
+      {session.data?.user?.image && (
+        <div className="pl-2 flex">
+          <Image
+            src={session.data?.user?.image}
+            width={30}
+            height={20}
+            alt="session.data?.user?.name"></Image>
+          <h6>
+            {session.data?.user?.name}
+            <br />
+            {session.data?.user?.type}
+          </h6>
+        </div>
+      )}
     </nav>
   );
 };
