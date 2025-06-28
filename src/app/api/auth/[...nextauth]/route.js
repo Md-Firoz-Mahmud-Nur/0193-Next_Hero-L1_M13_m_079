@@ -70,23 +70,4 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 
-const users = [
-  {
-    id: 1,
-    name: "Nur",
-    email: "nur@gmail.com",
-    type: "Admin",
-    password: "password",
-    image: "https://picsum.photos/200/300",
-  },
-  {
-    id: 1,
-    name: "firoz",
-    email: "firoz@gmail.com",
-    type: "member",
-    password: "password",
-    image: "https://picsum.photos/200/300",
-  },
-];
-
 export { handler as GET, handler as POST };

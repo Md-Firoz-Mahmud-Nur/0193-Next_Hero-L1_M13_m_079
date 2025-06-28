@@ -47,11 +47,13 @@ const Navbar = () => {
       </ul>
 
       <div>
-        <Link href={"/api/auth/signup"}>
-          <button className="mr-3 bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
-            Sign Up
-          </button>
-        </Link>
+        {session.status !== "authenticated" && (
+          <Link href={"/api/auth/signup"}>
+            <button className="mr-3 bg-white text-orange-600 font-semibold px-6 py-3 hover:bg-slate-300">
+              Sign Up
+            </button>
+          </Link>
+        )}
         {session.status !== "authenticated" ? (
           <button
             onClick={handler}
